@@ -1,19 +1,77 @@
 # E-Commerce Project For Baby Tools
 
-### TECHNOLOGIES
+Table of content:
+- Technologies
+- Hints
+- Configuration
+  - Local
+  - Server
+- Photos
+
+## Technologies
 
 - Python 3.9
 - Django 4.0.2
 - Venv
 
-### Hints
+## Hints
 
 This section will cover some hot tips when trying to interacting with this repository:
 
 - Settings & Configuration for Django can be found in `babyshop_app/babyshop/settings.py`
 - Routing: Routing information, such as available routes can be found from any `urls.py` file in `babyshop_app` and corresponding subdirectories
 
-### Photos
+## Configuration
+
+### On local machine
+
+1. Forking of repository
+   
+2. Cloning of repository:
+   
+```shell
+git clone git@github.com:mikemeyer186/baby-tools-shop.git
+```
+
+3. Creation of new branch (optional):
+   
+```shell
+git branch project                  # project = name of branch
+git checkout project
+git push origin project              
+```
+
+4. Creation of virtual environment with `venv`:
+
+```shell
+python -m venv bts_env              # bts_env = name of environment
+```
+> [!NOTE]
+> If a different Python version is needed, the path to installed Python version can bes used instead of `python`
+
+5. Installing of Django:
+   
+```shell
+pip install Django==4.0.2
+```
+
+7. Doing migrations:
+   
+```shell
+python manage.py migrate             # whithin directory `babyshop_app`
+```
+
+8. Testing, if project runs local (e.g. port 4200):
+
+```shell
+python manage.py runserver 4200      # whithin directory `babyshop_app`
+```
+
+
+
+
+
+## Photos
 
 ##### Home Page with login
 
