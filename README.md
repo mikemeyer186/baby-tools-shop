@@ -82,7 +82,7 @@ python manage.py createsuperuser     # whithin directory `babyshop_app`
 
 9. Creation of a `Dockerfile`:
 
-```docker
+```Dockerfile
 FROM python:3.9-alpine
 
 WORKDIR /app
