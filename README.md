@@ -89,7 +89,8 @@ WORKDIR /app
 
 COPY . ${WORKDIR}
 
-RUN python -m pip install -r requirements.txt
+RUN python -m pip install --upgrade pip && \
+    python -m pip install -r requirements.txt
 
 WORKDIR /app/babyshop_app
 
@@ -99,6 +100,40 @@ EXPOSE 8025
 
 ENTRYPOINT [ "python", "manage.py", "runserver", "0.0.0.0:8025" ]
 ```
+
+10. Creating of Docker image and running Docker container for testing:
+```shell
+docker build -t baby-tools-shop -f Dockerfile .
+docker run -p 4200:8025 baby-tools-shop   
+```
+
+</br>
+
+### On server
+
+1. Cloning repository:
+```shell
+git clone git@github.com:mikemeyer186/baby-tools-shop.git
+```
+
+2. Creation of `.env` file with secret keys and ip adress:
+```env
+DJANGO_SECRET_KEY=<secret key>        # secret key from Django app
+DJANGO_ALLOWED_HOST=<server ip>       # server ip aderss for ALLOWED_HOSTS in `settings.py`
+```
+
+3. Copying local database to server (optional):
+```shell
+scp db.sqlite3 <username>@<server ip>:/home/<path to repository>
+```
+
+5. Build Docker image and rund Docker container:
+```shell
+docker build -t baby-tools-shop -f Dockerfile .
+docker run -d -p 8025:8025 baby-tools-shop
+```
+
+
 
 ## Photos
 
