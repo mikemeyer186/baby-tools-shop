@@ -54,6 +54,10 @@ python -m venv bts_env              # bts_env = name of environment
 ```shell
 pip install Django==4.0.2
 ```
+Or, if there is a `requirements.txt` file with more dependencies:
+ ```
+python install -r requirements.txt
+```
 
 7. Doing migrations:
    
@@ -67,6 +71,11 @@ python manage.py migrate             # whithin directory `babyshop_app`
 python manage.py runserver 4200      # whithin directory `babyshop_app`
 ```
 
+9. Creation of a superuser for access to the Django-Admin panel:
+
+```
+python manage.py createsuperuser     # whithin directory `babyshop_app`
+```
 
 
 
