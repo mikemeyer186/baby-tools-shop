@@ -4,15 +4,13 @@ The repository is used for getting the webshop project running in a Docker conta
 
 </br>
 
-Table of content:
+Content:
 
--   Quickstart
--   Technologies
--   Hints
--   Full Configuration
-    -   Local machine
-    -   Server
--   Photos
+-   [Quickstart](#quickstart)
+-   [Technologies](#technologies)
+-   [Hints](#hints)
+-   [Full Configuration](#full-configuration)
+-   [Photos](#photos)
 
 </br>
 
