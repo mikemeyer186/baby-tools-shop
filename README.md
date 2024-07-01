@@ -1,13 +1,41 @@
 # E-Commerce Project For Baby Tools
 
+The repository is used for getting the webshop project running in a Docker container on a webserver.
+
+</br>
+
 Table of content:
 
+-   Quickstart
 -   Technologies
 -   Hints
--   Configuration
-    -   Local
+-   Full Configuration
+    -   Local machine
     -   Server
 -   Photos
+
+</br>
+
+## Quickstart
+To get the webshop running on a webserver, just follow these steps on the server. A Docker installation is required.
+
+```shell
+git clone git@github.com:mikemeyer186/baby-tools-shop.git    #cloning the repository
+```
+
+Create the `.env` file:
+```shell
+DJANGO_SECRET_KEY=<secret key>        # secret key from Django app in `settings.py`
+DJANGO_ALLOWED_HOST=<server ip>       # server ip adress for ALLOWED_HOSTS in `settings.py`
+```
+
+Build Docker image and run container:
+```shell
+docker build -t baby-tools-shop -f Dockerfile .
+docker run -d --restart on-failure -p 8025:8025 baby-tools-shop
+```
+
+</br>
 
 ## Technologies
 
@@ -15,16 +43,20 @@ Table of content:
 -   Django 4.0.2
 -   Venv
 
+</br>
+
 ## Hints
 
 This section will cover some hot tips when trying to interacting with this repository:
 
 -   Settings & Configuration for Django can be found in `babyshop_app/babyshop/settings.py`
--   Routing: Routing information, such as available routes can be found from any `urls.py` file in `babyshop_app` and corresponding subdirectories
+-   Routing: Routing information, such as available routes can be found from any `urls.py` file in `babyshop_app` and corresponding     subdirectories
 
-## Configuration
+</br>
 
-### On local machine
+## Full Configuration and usage
+
+### Getting the webshop running on local machine
 
 1. Forking of repository
 2. Cloning of repository:
@@ -48,7 +80,7 @@ python -m venv bts_env              # bts_env = name of environment
 ```
 
 > [!NOTE]
-> If a different Python version is needed, the path to installed Python version can bes used instead of `python`
+> If a different Python version is needed, the path to installed Python version can be used instead of `python`
 
 5. Installing of Django:
 
@@ -58,7 +90,7 @@ pip install Django==4.0.2
 
 Or, if there is a `requirements.txt` file with more dependencies:
 
-```
+```shell
 python install -r requirements.txt
 ```
 
@@ -74,7 +106,7 @@ python manage.py migrate             # whithin directory `babyshop_app`
 python manage.py runserver 4200      # whithin directory `babyshop_app`
 ```
 
-9. Creation of a superuser for access to the Django-Admin panel:
+9. Creation of a superuser for access to the Django admin panel:
 
 ```shell
 python manage.py createsuperuser     # whithin directory `babyshop_app`
@@ -109,17 +141,17 @@ docker run -p 4200:8025 baby-tools-shop
 
 </br>
 
-### On server
+### Geeting the webshop running on a webserver
 
 1. Cloning repository:
 ```shell
 git clone git@github.com:mikemeyer186/baby-tools-shop.git
 ```
 
-2. Creation of `.env` file with secret keys and ip adress:
+2. Creation of `.env` file with secret key and ip adress:
 ```env
 DJANGO_SECRET_KEY=<secret key>        # secret key from Django app
-DJANGO_ALLOWED_HOST=<server ip>       # server ip aderss for ALLOWED_HOSTS in `settings.py`
+DJANGO_ALLOWED_HOST=<server ip>       # server ip adress for ALLOWED_HOSTS in `settings.py`
 ```
 
 3. Copying local database to server (optional):
@@ -127,13 +159,13 @@ DJANGO_ALLOWED_HOST=<server ip>       # server ip aderss for ALLOWED_HOSTS in `s
 scp db.sqlite3 <username>@<server ip>:/home/<path to repository>
 ```
 
-5. Build Docker image and rund Docker container:
+5. Build Docker image and run Docker container (with restart option and port forwarding):
 ```shell
 docker build -t baby-tools-shop -f Dockerfile .
-docker run -d -p 8025:8025 baby-tools-shop
+docker run -d --restart on-failure -p 8025:8025 baby-tools-shop
 ```
 
-
+</br>
 
 ## Photos
 
