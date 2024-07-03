@@ -158,10 +158,11 @@ DJANGO_SECRET_KEY=<secret key>        # secret key of Django app (must be genera
 DJANGO_ALLOWED_HOST=<server ip>       # server ip adress for ALLOWED_HOSTS in `settings.py`
 ```
 
-3. Copying local database to server (optional):
+3. Copying local database and media files to server (optional):
 
 ```shell
 scp db.sqlite3 <username>@<server ip>:/home/<path to repository>
+scp -r media/ <username>@<server ip>:/home/<path to repository>
 ```
 
 5. Build Docker image and run Docker container (with restart option and port forwarding):
