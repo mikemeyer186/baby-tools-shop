@@ -143,7 +143,7 @@ docker run -p 4200:8025 baby-tools-shop
 
 </br>
 
-### Geeting the webshop running on a webserver
+### Getting the webshop running on a webserver
 
 1. Cloning repository:
 
@@ -151,10 +151,10 @@ docker run -p 4200:8025 baby-tools-shop
 git clone git@github.com:mikemeyer186/baby-tools-shop.git
 ```
 
-2. Creation of `.env` file with secret key and ip adress:
+2. Creation of `.env` file with secret key and server ip adress:
 
 ```env
-DJANGO_SECRET_KEY=<secret key>        # secret key from Django app
+DJANGO_SECRET_KEY=<secret key>        # new secret key
 DJANGO_ALLOWED_HOST=<server ip>       # server ip adress for ALLOWED_HOSTS in `settings.py`
 ```
 
