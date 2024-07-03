@@ -165,11 +165,19 @@ scp db.sqlite3 <username>@<server ip>:/home/<path to repository>
 scp -r media/ <username>@<server ip>:/home/<path to repository>
 ```
 
-5. Build Docker image and run Docker container (with restart option and port forwarding):
+5. Build Docker image:
 
 ```shell
 docker build -t baby-tools-shop -f Dockerfile .
-docker run -d --restart on-failure -p 8025:8025 baby-tools-shop
+```
+
+6. Run Docker container (with restart option, port forwarding and volume mapping):
+   
+```
+docker run -d --restart on-failure -p 8025:8025  \
+-v /home/<username>/repos/baby-tools-shop/babyshop_app/media:/app/babyshop_app/media \
+-v /home/<username>/repos/baby-tools-shop/babyshop_app/db.sqlite3:/app/babyshop_app/db.sqlite3 \
+baby-tools-shop
 ```
 
 </br>
