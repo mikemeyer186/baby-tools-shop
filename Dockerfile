@@ -14,7 +14,7 @@ RUN python -m pip install --upgrade pip && \
 # change to subdirectory    
 WORKDIR /app/babyshop_app
 
-# doing migrations and collecting static files
+# doing migrations
 RUN python manage.py migrate
 
 # set public port of container
