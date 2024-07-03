@@ -25,7 +25,7 @@ git clone git@github.com:mikemeyer186/baby-tools-shop.git    #cloning the reposi
 Create the `.env` file:
 
 ```shell
-DJANGO_SECRET_KEY=<secret key>        # secret key from Django app in `settings.py`
+DJANGO_SECRET_KEY=<secret key>        # secret key of Django app (must be generated)
 DJANGO_ALLOWED_HOST=<server ip>       # server ip adress for ALLOWED_HOSTS in `settings.py`
 ```
 
@@ -89,7 +89,7 @@ python -m venv bts_env              # bts_env = name of environment
 pip install Django==4.0.2
 ```
 
-Or, if there is a `requirements.txt` file with more dependencies:
+Or, install with `requirements.txt` file with all dependencies:
 
 ```shell
 python install -r requirements.txt
@@ -153,8 +153,8 @@ git clone git@github.com:mikemeyer186/baby-tools-shop.git
 
 2. Creation of `.env` file with secret key and server ip adress:
 
-```env
-DJANGO_SECRET_KEY=<secret key>        # new secret key
+```shell
+DJANGO_SECRET_KEY=<secret key>        # secret key of Django app (must be generated)
 DJANGO_ALLOWED_HOST=<server ip>       # server ip adress for ALLOWED_HOSTS in `settings.py`
 ```
 
