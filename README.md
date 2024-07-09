@@ -42,6 +42,8 @@ docker run -d --restart on-failure -p 8025:8025 baby-tools-shop
 
 -   Python 3.9
 -   Django 4.0.2
+-   Pillow 10.3
+-   Python-dotenv 1.0.1
 -   Venv
 
 </br>
@@ -83,13 +85,7 @@ python -m venv bts_env              # bts_env = name of environment
 > [!NOTE]
 > If a different Python version is needed, the path to installed Python version can be used instead of `python`
 
-5. Installing of Django:
-
-```shell
-pip install Django==4.0.2
-```
-
-Or, install with `requirements.txt` file with all dependencies:
+5. Installing of dependencies:
 
 ```shell
 python install -r requirements.txt
@@ -101,7 +97,7 @@ python install -r requirements.txt
 python manage.py migrate             # whithin directory `babyshop_app`
 ```
 
-8. Testing, if project runs local (e.g. port 4200):
+8. Starting development server (e.g. port 4200):
 
 ```shell
 python manage.py runserver 4200      # whithin directory `babyshop_app`
@@ -158,26 +154,25 @@ DJANGO_SECRET_KEY=<secret key>        # secret key of Django app (must be genera
 DJANGO_ALLOWED_HOST=<server ip>       # server ip adress for ALLOWED_HOSTS in `settings.py`
 ```
 
-3. Copying local database and media files to server (optional):
+3. Build Docker image with build args to create superuser:
 
 ```shell
-scp db.sqlite3 <username>@<server ip>:/home/<path to repository>
-scp -r media/ <username>@<server ip>:/home/<path to repository>
+docker build -t baby-tools-shop \
+    --build-arg SUPERUSER_USERNAME=<username> \
+    --build-arg SUPERUSER_EMAIL=<email> \
+    --build-arg SUPERUSER_PASSWORD=<password> \
+    -f Dockerfile .
 ```
 
-5. Build Docker image:
+4. Run Docker container (with restart option, port forwarding and volume mapping):
 
 ```shell
-docker build -t baby-tools-shop -f Dockerfile .
-```
-
-6. Run Docker container (with restart option, port forwarding and volume mapping):
-   
-```
-docker run -d --restart on-failure -p 8025:8025  \
--v /home/<username>/repos/baby-tools-shop/babyshop_app/media:/app/babyshop_app/media \
--v /home/<username>/repos/baby-tools-shop/babyshop_app/db.sqlite3:/app/babyshop_app/db.sqlite3 \
-baby-tools-shop
+docker run -d \
+    -p 8025:8025 \
+    --restart on-failure \
+    -v <path_to_media_directory>:/app/babyshop_app/media \
+    -v <path_to_database>/db.sqlite3:/app/babyshop_app/db.sqlite3 \
+    baby-tools-shop
 ```
 
 </br>

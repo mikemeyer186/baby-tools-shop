@@ -1,3 +1,5 @@
 .gitignore
 .git/
 __pycache__/
+bts_env/
+project_images/

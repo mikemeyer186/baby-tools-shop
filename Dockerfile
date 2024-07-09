@@ -15,7 +15,19 @@ RUN python -m pip install --upgrade pip && \
 WORKDIR /app/babyshop_app
 
 # doing migrations
-RUN python manage.py migrate
+RUN python manage.py makemigrations && \
+    python manage.py migrate
+
+# setting build args for createsuperuser
+ARG SUPERUSER_USERNAME
+ARG SUPERUSER_EMAIL
+ARG SUPERUSER_PASSWORD
+
+# creatin superuser on build
+RUN DJANGO_SUPERUSER_PASSWORD=${SUPERUSER_PASSWORD} \
+    python manage.py createsuperuser --noinput \
+    --username "${SUPERUSER_USERNAME}" \
+    --email "${SUPERUSER_EMAIL}" 
 
 # set public port of container
 EXPOSE 8025
