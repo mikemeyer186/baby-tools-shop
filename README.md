@@ -82,8 +82,12 @@ git push origin project
 python -m venv bts_env              # bts_env = name of environment
 ```
 
+</br>
+
 > [!NOTE]
 > If a different Python version is needed, the path to installed Python version can be used instead of `python`
+
+</br>
 
 5. Installing of dependencies:
 
@@ -109,7 +113,7 @@ python manage.py runserver 4200      # whithin directory `babyshop_app`
 python manage.py createsuperuser     # whithin directory `babyshop_app`
 ```
 
-9. Creation of a `Dockerfile`:
+9. Creation of a `Dockerfile` (see comments in `Dockerfile`):
 
 ```Dockerfile
 FROM python:3.9-alpine
@@ -123,12 +127,29 @@ RUN python -m pip install --upgrade pip && \
 
 WORKDIR /app/babyshop_app
 
-RUN python manage.py migrate
+RUN python manage.py makemigrations && \
+    python manage.py migrate
+
+ARG SUPERUSER_USERNAME
+ARG SUPERUSER_EMAIL
+ARG SUPERUSER_PASSWORD
+
+ENV DJANGO_SUPERUSER_USERNAME=${SUPERUSER_USERNAME}
+ENV DJANGO_SUPERUSER_EMAIL=${SUPERUSER_EMAIL}
+ENV DJANGO_SUPERUSER_PASSWORD=${SUPERUSER_PASSWORD}
 
 EXPOSE 8025
 
-ENTRYPOINT [ "python", "manage.py", "runserver", "0.0.0.0:8025" ]
+ENTRYPOINT ["/bin/sh", "-c", "python create_superuser.py && python manage.py runserver 0.0.0.0:8025"]
 ```
+
+</br>
+
+> [!NOTE]
+> On running the container the script `create_superuser.py` will be executed to check if a superuser with given credentials already exists.
+> Only ff the superuser not exists, it will be created. This avoids errors on running the container multiple times, due to volumemapping of the database on host system.
+
+</br>
 
 10. Creating of Docker image and running Docker container for testing:
 
