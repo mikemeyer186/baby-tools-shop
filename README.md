@@ -95,19 +95,19 @@ python -m venv bts_env              # bts_env = name of environment
 python install -r requirements.txt
 ```
 
-7. Doing migrations:
+6. Doing migrations:
 
 ```shell
 python manage.py migrate             # whithin directory `babyshop_app`
 ```
 
-8. Starting development server (e.g. port 4200):
+7. Starting development server (e.g. port 4200):
 
 ```shell
 python manage.py runserver 4200      # whithin directory `babyshop_app`
 ```
 
-9. Creation of a superuser for access to the Django admin panel:
+8. Creation of a superuser for access to the Django admin panel:
 
 ```shell
 python manage.py createsuperuser     # whithin directory `babyshop_app`
