@@ -28,11 +28,8 @@ ENV DJANGO_SUPERUSER_USERNAME=${SUPERUSER_USERNAME}
 ENV DJANGO_SUPERUSER_EMAIL=${SUPERUSER_EMAIL}
 ENV DJANGO_SUPERUSER_PASSWORD=${SUPERUSER_PASSWORD}
 
-# creatin superuser on build
-# RUN python manage.py createsuperuser --noinput
-
 # set public port of container
 EXPOSE 8025
 
 # commmands on initial starting of container
-ENTRYPOINT ["/bin/sh", "-c", "python manage.py createsuperuser --noinput && python manage.py runserver 0.0.0.0:8025"]
+ENTRYPOINT ["/bin/sh", "-c", "python create_superuser.py && python manage.py runserver 0.0.0.0:8025"]
