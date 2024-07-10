@@ -138,16 +138,12 @@ ENV DJANGO_SUPERUSER_USERNAME=${SUPERUSER_USERNAME}
 ENV DJANGO_SUPERUSER_EMAIL=${SUPERUSER_EMAIL}
 ENV DJANGO_SUPERUSER_PASSWORD=${SUPERUSER_PASSWORD}
 
+RUN python manage.py createsuperuser --noinput
+
 EXPOSE 8025
 
-ENTRYPOINT ["/bin/sh", "-c", "python create_superuser.py && python manage.py runserver 0.0.0.0:8025"]
+ENTRYPOINT ["python", "manage.py", "runserver", "0.0.0.0:8025"]
 ```
-
-</br>
-
-> [!NOTE]
-> On running the container the script `create_superuser.py` will be executed to check if a superuser with given credentials already exists.
-> Only ff the superuser not exists, it will be created. This avoids errors on running the container multiple times, due to volumemapping of the database on host system.
 
 </br>
 
